@@ -116,7 +116,7 @@ export const FormSelect = styled.select`
 
 export const Form2 = styled.form`
   background-color: #010101;
-  max-width: 900px;
+  max-width: 500px;
   height: auto;
   width: 100%;
   z-index: 1;
