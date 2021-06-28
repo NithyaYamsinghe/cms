@@ -7,6 +7,8 @@ import SignUpScreen from "./../pages/SignUpScreen";
 import SideNavigationBar from "../common/SideNavigationBar/SideNavigationBar";
 import Footer from "./../common/Footer/Footer";
 import Default from "./../common/Default/Default";
+import UploadNewResearchScreen from "./../pages/UploadNewResearchScreen";
+import UploadNewWorkShopScreen from "./../pages/UploadNewWorkShopScreen";
 
 const AppRouter = () => {
   return (
@@ -14,8 +16,16 @@ const AppRouter = () => {
       <SideNavigationBar />
       <Switch>
         <Route exact path="/" component={HomeScreen}></Route>
-        <Route exact path="/sign-in" component={SignInScreen}></Route>
-        <Route exact path="/sign-up" component={SignUpScreen}></Route>
+        <Route path="/sign-in" component={SignInScreen}></Route>
+        <Route path="/sign-up" component={SignUpScreen}></Route>
+        <Route
+          path="/upload-new-research"
+          component={UploadNewResearchScreen}
+        ></Route>
+        <Route
+          path="/upload-new-workshop"
+          component={UploadNewWorkShopScreen}
+        ></Route>
         <Route component={Default}></Route>
       </Switch>
       <Footer />

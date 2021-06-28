@@ -82,7 +82,7 @@ const SideNavigationBar = () => {
             </li>
             <li className="nav-text">
               <Link
-                to="/profile"
+                to="/upload-new-research"
                 style={{
                   textDecoration: "none",
                   "font-family": "Anton",
