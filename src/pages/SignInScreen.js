@@ -1,7 +1,12 @@
 import React from "react";
+import SignInForm from "./../components/SignIn/SignInForm";
 
 const SignInScreen = () => {
-  return <React.Fragment>Sign In</React.Fragment>;
+  return (
+    <React.Fragment>
+      <SignInForm />
+    </React.Fragment>
+  );
 };
 
 export default SignInScreen;
