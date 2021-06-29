@@ -92,8 +92,8 @@ const UploadNewResearchForm = () => {
           </div>
         </div>
       )}
-      <FormWrap>
-        <FormContent className="mt-5">
+      <FormWrap style={{ marginLeft: "200px" }}>
+        <FormContent className="mt-3">
           <Form3 onSubmit={handleSubmit}>
             <FormLabel htmlFor="for">Research Title</FormLabel>
             <FormInput

@@ -100,8 +100,8 @@ const UploadNewWorkShopForm = () => {
           </div>
         </div>
       )}
-      <FormWrap>
-        <FormContent className="mt-5">
+      <FormWrap style={{ marginLeft: "200px" }}>
+        <FormContent className="mt-3">
           <Form3 onSubmit={handleSubmit}>
             <FormLabel htmlFor="for">Workshop Title</FormLabel>
             <FormInput
