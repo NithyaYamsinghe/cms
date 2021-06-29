@@ -10,11 +10,7 @@ export const Container = styled.div`
   top: 0;
   z-index: 0;
   overflow: hidden;
-  background: linear-gradient(
-    108deg,
-    rgba(1, 147, 86, 1) 0%,
-    rgba(10, 201, 122, 1) 100%
-  );
+  background: #fff;
 `;
 export const FormWrap = styled.div`
   height: 100%;
@@ -50,7 +46,7 @@ export const FormContent = styled.div`
   }
 `;
 export const Form = styled.form`
-  background-color: #010101;
+  background-color: #77acf1;
   max-width: 400px;
   height: auto;
   width: 100%;
@@ -59,7 +55,7 @@ export const Form = styled.form`
   margin: 0 auto;
   padding: 80px 32px;
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  box-shadow: #77acf1;
   font-family: "Anton", sans-serif !important;
 
   @media screen and (max-width: 480px) {

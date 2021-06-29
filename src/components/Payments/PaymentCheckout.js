@@ -89,6 +89,7 @@ const PaymentCheckout = () => {
         style={{
           marginLeft: "200px",
           marginRight: "50px",
+          fontFamily: `"Oswald", sans-serif !important`,
         }}
       >
         <Paper className={classes.paper}>
