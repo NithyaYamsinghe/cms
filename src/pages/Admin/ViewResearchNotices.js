@@ -1,94 +1,92 @@
-import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import SearchBox from "../../../common/SearchBox/SearchBox";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+import { useState, useEffect } from "react";
+import { Table, Container, Button, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import {
+  getResearchNoticesApi,
+  approveResearchNoticeApi,
+  deleteResearchNoticeApi,
+} from "../../services/researchService";
 
 const ViewResearchNotices = () => {
-  const classes = useStyles();
+  const [research, setResearch] = useState([]);
+
+  const getResearchNotices = async () => {
+    const research = await getResearchNoticesApi();
+    setResearch(research.data);
+  };
+
+  const approveResearchNotice = async (researchNoticeId) => {
+    await approveResearchNoticeApi(researchNoticeId);
+    getResearchNotices();
+  };
+
+  const deleteResearchNotice = async (researchNoticeId) => {
+    await deleteResearchNoticeApi(researchNoticeId);
+    getResearchNotices();
+  };
+
+  const showResearchRows = () => {
+    if (!research.length) return null;
+    return research.map((row) => {
+      return (
+        <tr>
+          <td>{row.title}</td>
+          <td>{row.description}</td>
+          <td>{row.topicInterests}</td>
+          <td>{row.authors}</td>
+          <td>
+            <Link
+              to={`/admin/research-notices/${row._id}`}
+              className="btn btn-primary"
+            >
+              View
+            </Link>
+          </td>
+          <td>
+            <Button
+              onClick={() => approveResearchNotice(row._id)}
+              disabled={row.status !== "PENDING_REVIEW"}
+            >
+              {row.status === "PENDING_REVIEW" ? "Approve" : "Approved"}
+            </Button>
+          </td>
+          <td>
+            <Button
+              onClick={() => deleteResearchNotice(row._id)}
+              variant="danger"
+            >
+              Delete
+            </Button>
+          </td>
+        </tr>
+      );
+    });
+  };
+
+  useEffect(() => {
+    getResearchNotices();
+  }, []);
 
   return (
-    <React.Fragment>
-      <SearchBox placeholder="search" />
-      <br />
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Title</StyledTableCell>
-              <StyledTableCell align="right">Description</StyledTableCell>
-              <StyledTableCell align="right">Topics</StyledTableCell>
-              <StyledTableCell align="right">Authors</StyledTableCell>
-              <StyledTableCell align="right">Submission</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
-              <StyledTableCell align="right">View</StyledTableCell>
-              <StyledTableCell align="right">Update</StyledTableCell>
-              <StyledTableCell align="right">Delete</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                Smart Mask
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                This is a IOT based mask
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                Internet of Things, Machine Learning
-              </StyledTableCell>
-              <StyledTableCell align="right">N.R. Yamasinghe</StyledTableCell>
-              <StyledTableCell align="right">PDF</StyledTableCell>
-              <StyledTableCell align="right">Approved</StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-primary">
-                  View
-                </button>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-success">
-                  Update
-                </button>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-danger">
-                  Delete
-                </button>
-              </StyledTableCell>
-            </StyledTableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </React.Fragment>
+    <Container>
+      <Row className="my-3">
+        <h4>Available Research Notices</h4>
+      </Row>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Topic Interests</td>
+            <td>Authors</td>
+            <td>View</td>
+            <td>Approve</td>
+            <td>Delete</td>
+          </tr>
+        </thead>
+        <tbody>{showResearchRows()}</tbody>
+      </Table>
+    </Container>
   );
 };
 
