@@ -80,21 +80,21 @@ export const FormLabel = styled.label`
   color: #fff;
 `;
 export const FormInput = styled.input`
-  padding: 12px 12px;
+  padding: 10px 10px;
   margin-bottom: 24px;
   border-radius: 4px;
   display: inline-block;
 `;
 
 export const FormTextArea = styled.textarea`
-  padding: 12px 12px;
+  padding: 10px 10px;
   margin-bottom: 24px;
   border-radius: 4px;
   display: inline-block;
 `;
 export const FormButton = styled.button`
   background: var(--lightBlue);
-  padding: 12px 0;
+  padding: 10px 0;
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -150,7 +150,7 @@ export const FormSelect2 = styled.select`
 `;
 
 export const FormInput2 = styled.input`
-  padding: 12px 12px;
+  padding: 10px 10px;
   margin-bottom: 24px;
   border-radius: 4px;
   display: inline-block;
@@ -160,7 +160,7 @@ export const FormInput2 = styled.input`
 
 export const FormButton2 = styled.button`
   background: var(--lightBlue);
-  padding: 12px 0;
+  padding: 10px 0;
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -171,7 +171,7 @@ export const FormButton2 = styled.button`
 
 export const Form3 = styled.form`
   background-color: #010101;
-  max-width: 800px;
+  max-width: 1200px;
   height: auto;
   width: 100%;
   z-index: 1;
@@ -185,4 +185,21 @@ export const Form3 = styled.form`
   @media screen and (max-width: 480px) {
     padding: 32px 32px;
   }
+`;
+
+export const FormInput3 = styled.input`
+  padding: 10px 10px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  display: inline-block;
+  width: 520px;
+  border: 1px solid #000;
+`;
+
+export const FormSelect3 = styled.select`
+  padding: 10px 10px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  width: 520px;
+  border: 1px solid #000;
 `;
