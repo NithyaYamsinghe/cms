@@ -13,6 +13,9 @@ import ViewAllResearchDocumentsScreen from "./../pages/ViewAllResearchDocumentsS
 import ProfileScreen from "./../pages/ProfileScreen";
 import PaymentScreen from "./../pages/PaymentScreen";
 
+// Admin
+import AdminHome from "../components/Admin/AdminHome";
+
 const AppRouter = () => {
   return (
     <React.Fragment>
@@ -35,6 +38,7 @@ const AppRouter = () => {
           path="/submitted-research-documents"
           component={ViewAllResearchDocumentsScreen}
         ></Route>
+        <Route path="/admin" component={AdminHome} />
         <Route component={Default}></Route>
       </Switch>
       <Footer />
