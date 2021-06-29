@@ -1,5 +1,6 @@
 import axios from "axios";
 axios.defaults.headers.common["Content-Type"] = "application/json";
+axios.defaults.baseURL = "http://localhost:5000";
 
 //Fixing Bi Directional Dependancies
 export function setJwt(jwt) {

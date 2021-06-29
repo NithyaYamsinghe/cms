@@ -20,6 +20,9 @@ import ViewPaymentReceiptScreen from "./../pages/ViewPaymentReceiptScreen";
 import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
 import UpdateResearchScreen from "./../pages/UpdateResearchScreen";
 
+// Admin
+import AdminHome from "../components/Admin/AdminHome";
+
 const AppRouter = () => {
   return (
     <React.Fragment>
@@ -61,6 +64,7 @@ const AppRouter = () => {
           path="/view-submitted-workshops"
           component={ViewAllWorkShopsScreen}
         ></Route>
+        <Route path="/admin" component={AdminHome}></Route>
         <Route component={Default}></Route>
       </Switch>
       <Footer />
