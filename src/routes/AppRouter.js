@@ -12,6 +12,13 @@ import UploadNewWorkShopScreen from "./../pages/UploadNewWorkShopScreen";
 import ViewAllResearchDocumentsScreen from "./../pages/ViewAllResearchDocumentsScreen";
 import ProfileScreen from "./../pages/ProfileScreen";
 import PaymentScreen from "./../pages/PaymentScreen";
+import ViewAllPaymentHistoryScreen from "./../pages/ViewAllPaymentHistoryScreen";
+import ViewAllWorkShopsScreen from "./../pages/ViewAllWorkShopsScreen";
+import ViewWorkShopScreen from "./../pages/ViewWorkshopScreen";
+import ViewResearchScreen from "./../pages/ViewResearchScreen";
+import ViewPaymentReceiptScreen from "./../pages/ViewPaymentReceiptScreen";
+import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
+import UpdateResearchScreen from "./../pages/UpdateResearchScreen";
 
 // Admin
 import AdminHome from "../components/Admin/AdminHome";
@@ -26,6 +33,21 @@ const AppRouter = () => {
         <Route path="/sign-up" component={SignUpScreen}></Route>
         <Route path="/user-profile" component={ProfileScreen}></Route>
         <Route path="/user-payment" component={PaymentScreen}></Route>
+        <Route path="/view-workshop/:id" component={ViewWorkShopScreen}></Route>
+        <Route path="/view-research/:id" component={ViewResearchScreen}></Route>
+        <Route
+          path="/view-payment-receipt/:id"
+          component={ViewPaymentReceiptScreen}
+        ></Route>
+        <Route
+          path="/update-workshop/:id"
+          component={UpdateWorkShopForm}
+        ></Route>
+        <Route path="/update-research" component={UpdateResearchScreen}></Route>
+        <Route
+          path="/payment-history"
+          component={ViewAllPaymentHistoryScreen}
+        ></Route>
         <Route
           path="/upload-new-research"
           component={UploadNewResearchScreen}
@@ -35,10 +57,14 @@ const AppRouter = () => {
           component={UploadNewWorkShopScreen}
         ></Route>
         <Route
-          path="/submitted-research-documents"
+          path="/view-submitted-research-documents"
           component={ViewAllResearchDocumentsScreen}
         ></Route>
-        <Route path="/admin" component={AdminHome} />
+        <Route
+          path="/view-submitted-workshops"
+          component={ViewAllWorkShopsScreen}
+        ></Route>
+        <Route path="/admin" component={AdminHome}></Route>
         <Route component={Default}></Route>
       </Switch>
       <Footer />
