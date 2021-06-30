@@ -69,6 +69,22 @@ const SignInForm = () => {
                 Create an Account
               </Link>
             </Text>
+            <Text>
+              <Link
+                to="/admin/sign-in"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                Admin Sign In
+              </Link>
+            </Text>
+            <Text>
+              <Link
+                to="/admin/sign-up"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                Admin Sign Up
+              </Link>
+            </Text>
           </Form>
         </FormContent>
       </FormWrap>
