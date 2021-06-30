@@ -177,7 +177,6 @@ export function AuthProvider({ children }) {
   useEffect(async () => {
     setLoading(false);
     const user = AuthService.getCurrentUser();
-    console.log(user);
     if (user != null) {
       setCurrentUserID(user.id);
       setCurrentUserType(user.type);

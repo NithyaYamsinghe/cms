@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PaymentReview from "./PaymentReview";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
@@ -53,8 +53,9 @@ function getStepContent(step) {
 }
 const PaymentCheckout = ({ match }) => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [paid, setPaid] = useState("");
   const classes = useStyles();
-  const { createPayment, currentUserID } = useAuth();
+  const { createPayment, currentUserID, currentUserType } = useAuth();
   const handleNext = () => {
     setActiveStep(activeStep + 1);
     if (activeStep === steps.length - 1) {
@@ -70,6 +71,13 @@ const PaymentCheckout = ({ match }) => {
       const user = currentUserID;
       const researchId = match.params.id;
 
+      if (currentUserType === "RESEARCHER") {
+        setPaid("research paper");
+      }
+      if (currentUserType === "ATTENDEE") {
+        setPaid("ICAF conference ticket");
+      }
+
       const data = {
         firstname: firstName,
         lastname: lastName,
@@ -79,7 +87,7 @@ const PaymentCheckout = ({ match }) => {
         cardNumber: cardNumber,
         expDate: expDate,
         cvv: cvv,
-        paidFor: "IOT research paper",
+        paidFor: paid,
         user: user,
         researchId: researchId,
       };

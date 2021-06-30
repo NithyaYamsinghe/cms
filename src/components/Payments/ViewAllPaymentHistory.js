@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import SearchBox from "./../../common/SearchBox/SearchBox";
 import moment from "moment";
 import { useAuth } from "./../../context/authContext";
+import ViewPaymentReceipt from "./ViewPaymentReceipt";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -40,6 +41,10 @@ const ViewAllResearchDocuments = () => {
   const [data, setData] = useState([]);
   const { currentUserID, getPayment } = useAuth();
 
+  const navigateViewReceipt = (e, paymentId) => {
+    window.location = `/view-payment-receipt/${paymentId}`;
+  };
+
   useEffect(async () => {
     const data = await getPayment(currentUserID);
     setData(data.data);
@@ -56,7 +61,7 @@ const ViewAllResearchDocuments = () => {
               <StyledTableCell>Payment ID</StyledTableCell>
               <StyledTableCell align="right">Recipet ID</StyledTableCell>
               <StyledTableCell align="right">Type</StyledTableCell>
-              <StyledTableCell align="right">Description</StyledTableCell>
+
               <StyledTableCell align="right">Amount</StyledTableCell>
               <StyledTableCell align="right">Date</StyledTableCell>
               <StyledTableCell align="right">Time</StyledTableCell>
@@ -73,7 +78,7 @@ const ViewAllResearchDocuments = () => {
                 <StyledTableCell component="th" scope="row">
                   {item.receiptId}
                 </StyledTableCell>
-                <StyledTableCell align="right">research paper</StyledTableCell>
+
                 <StyledTableCell align="right">{item.paidFor}</StyledTableCell>
                 <StyledTableCell align="right">{item.amount}</StyledTableCell>
                 <StyledTableCell align="right">
@@ -84,7 +89,11 @@ const ViewAllResearchDocuments = () => {
                 </StyledTableCell>
                 <StyledTableCell align="right">{item.status}</StyledTableCell>
                 <StyledTableCell align="right">
-                  <button type="button" class="btn btn-primary">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={(e) => navigateViewReceipt(e, item._id)}
+                  >
                     View
                   </button>
                 </StyledTableCell>

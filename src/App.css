@@ -11,6 +11,10 @@ body {
   color: var(--mainDark) !important;
 }
 
+.dashboard-text {
+  font-family: "Anton", sans-serif !important;
+}
+
 .text-title {
   font-family: "Anton", sans-serif !important;
   letter-spacing: 0.3rem;

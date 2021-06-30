@@ -44,6 +44,10 @@ const ViewAllWorkShops = () => {
     window.location = `/update-workshop/${workshopId}`;
   };
 
+  const navigateViewWorkshop = (e, workshopId) => {
+    window.location = `/view-workshop/${workshopId}`;
+  };
+
   const deleteWorkshopSubmission = (e, workshopId) => {
     deleteWorkshop(workshopId);
   };
@@ -95,7 +99,11 @@ const ViewAllWorkShops = () => {
                 {/* <StyledTableCell align="right">PDF</StyledTableCell> */}
                 <StyledTableCell align="right">{item.status}</StyledTableCell>
                 <StyledTableCell align="right">
-                  <button type="button" class="btn btn-primary">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={(e) => navigateViewWorkshop(e, item._id)}
+                  >
                     View
                   </button>
                 </StyledTableCell>
