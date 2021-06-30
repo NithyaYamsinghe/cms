@@ -9,6 +9,7 @@ import Stepper from "@material-ui/core/Stepper";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { useAuth } from "./../../context/authContext";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -53,6 +54,7 @@ function getStepContent(step) {
 const PaymentCheckout = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const classes = useStyles();
+  const { createPayment, currentUserID } = useAuth();
   const handleNext = () => {
     setActiveStep(activeStep + 1);
     if (activeStep === steps.length - 1) {
@@ -65,17 +67,22 @@ const PaymentCheckout = () => {
       const amountString = localStorage.getItem("amount");
       const amount = parseFloat(amountString);
       const country = localStorage.getItem("country");
+      const user = currentUserID;
 
-      const rechargeData = {
-        cardName: cardName,
+      const data = {
+        firstname: firstName,
+        lastname: lastName,
+        amount: amount,
+        country: country,
+        cardname: cardName,
         cardNumber: cardNumber,
         expDate: expDate,
         cvv: cvv,
-        firstName: firstName,
-        lastName: lastName,
-        amount: amount,
-        country: country,
+        paidFor: "IOT research paper",
+        user: user,
       };
+
+      createPayment(data);
     }
   };
 

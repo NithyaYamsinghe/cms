@@ -5,14 +5,13 @@ import {
   FormWrap,
   FormContent,
   Form3,
-  FormH1,
   FormButton,
   FormInput,
   FormLabel,
   FormTextArea,
 } from "./../../../common/FormElements/FormElements";
 import Select from "react-select";
-import UploadService from "./../../../services/FileUploadService";
+import { useAuth } from "./../../../context/authContext";
 
 const UploadNewWorkShopForm = () => {
   const [title, setTitle] = useState("");
@@ -24,14 +23,13 @@ const UploadNewWorkShopForm = () => {
     { value: 1, label: "N.R. Yamasinghe" },
     { value: 2, label: "D.M.Y.S. Dissanayake" },
   ]);
-  const [status, setStatus] = useState("");
 
   const [selectedResourcePersons, setSelectedResourcePersons] = useState([]);
-
   const [selectedFiles, setSelectedFiles] = useState(undefined);
   const [currentFile, setCurrentFile] = useState(undefined);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
+  const { workshopFileUpload, currentUserID } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,8 +37,8 @@ const UploadNewWorkShopForm = () => {
 
     setProgress(0);
     setCurrentFile(currentFile);
-
-    UploadService.upload(
+    const user = currentUserID;
+    workshopFileUpload(
       currentFile,
       description,
       title,
@@ -48,7 +46,7 @@ const UploadNewWorkShopForm = () => {
       date,
       startTime,
       endTime,
-      status,
+      user,
       (event) => {
         setProgress(Math.round((100 * event.loaded) / event.total));
       }
@@ -70,36 +68,23 @@ const UploadNewWorkShopForm = () => {
     setSelectedFiles(file);
   };
 
-  const handleStartTimeChange = (time) => {
-    setStartTime(time);
-  };
+  // const handleStartTimeChange = (tiime) => {
+  //   setStartTime(tiime);
+  // };
 
-  const handleEndTimeChange = (time) => {
-    setEndTime(time);
-  };
+  // const handleEndTimeChange = (time) => {
+  //   setEndTime(time);
+  // };
 
   const onResourcePersonSelect = (e) => {
-    setSelectedResourcePersons(e ? e.map((item) => item.value) : []);
+    setSelectedResourcePersons(e ? e.map((item) => item.label) : []);
   };
 
   console.log(startTime);
   console.log(endTime);
+
   return (
     <React.Fragment>
-      {currentFile && (
-        <div className="progress">
-          <div
-            className="progress-bar progress-bar-info progress-bar-striped"
-            role="progressbar"
-            aria-valuenow={progress}
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: progress + "%" }}
-          >
-            {progress}%
-          </div>
-        </div>
-      )}
       <FormWrap style={{ marginLeft: "200px" }}>
         <FormContent className="mt-3">
           <Form3 onSubmit={handleSubmit}>
@@ -136,24 +121,39 @@ const UploadNewWorkShopForm = () => {
               onChange={(e) => setDate(e.target.value)}
             />
             <FormLabel htmlFor="for">Start Time</FormLabel>
-            <TimePicker
-              start="10:00"
-              end="21:00"
-              step={30}
-              onChange={handleStartTimeChange}
+            <FormInput
+              htmlFor="startTime"
+              required
+              type="time"
               value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
             />
             <br />
             <FormLabel htmlFor="for">End Time</FormLabel>
-            <TimePicker
-              start="10:00"
-              end="21:00"
+            <FormInput
+              htmlFor="endTime"
+              required
+              type="time"
               value={endTime}
-              step={30}
-              onChange={handleEndTimeChange}
+              onChange={(e) => setEndTime(e.target.value)}
             />
             <br />
             <FormLabel htmlFor="for">Upload WorkShop Proposal</FormLabel>
+            {currentFile && (
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style={{ width: progress + "%" }}
+                >
+                  {progress}%
+                </div>
+              </div>
+            )}
+            <br />
             <DropzoneArea
               onChange={selectFile}
               filesLimit={1}

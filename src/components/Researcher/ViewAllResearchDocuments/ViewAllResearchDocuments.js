@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import moment from "moment";
 import SearchBox from "../../../common/SearchBox/SearchBox";
-import { useAuth } from "./../../../context/AuthContext";
+import { useAuth } from "./../../../context/authContext";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -38,10 +38,14 @@ const useStyles = makeStyles({
 const ViewAllResearchDocuments = () => {
   const classes = useStyles();
   const [data, setData] = useState([]);
-  const { getResearch, currentUserID } = useAuth();
+  const { getResearch, currentUserID, deleteResearch } = useAuth();
 
   const navigateUpdateResearch = (e, researchId) => {
     window.location = `/update-research/${researchId}`;
+  };
+
+  const deleteResearchSubmission = (e, researchId) => {
+    deleteResearch(researchId);
   };
 
   useEffect(async () => {
@@ -49,7 +53,6 @@ const ViewAllResearchDocuments = () => {
     setData(data.data);
   }, []);
 
-  console.log(data);
   return (
     <React.Fragment>
       <SearchBox placeholder="search" />
@@ -107,7 +110,11 @@ const ViewAllResearchDocuments = () => {
                   </button>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <button type="button" class="btn btn-danger">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={(e) => deleteResearchSubmission(e, item._id)}
+                  >
                     Delete
                   </button>
                 </StyledTableCell>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBox from "./../../common/SearchBox/SearchBox";
+import moment from "moment";
+import { useAuth } from "./../../context/authContext";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -35,6 +37,13 @@ const useStyles = makeStyles({
 
 const ViewAllResearchDocuments = () => {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const { currentUserID, getPayment } = useAuth();
+
+  useEffect(async () => {
+    const data = await getPayment(currentUserID);
+    setData(data.data);
+  }, []);
 
   return (
     <React.Fragment>
@@ -56,27 +65,33 @@ const ViewAllResearchDocuments = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                RP124566
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                ICAF1267
-              </StyledTableCell>
-              <StyledTableCell align="right">research paper</StyledTableCell>
-              <StyledTableCell align="right">
-                approved research paper submission
-              </StyledTableCell>
-              <StyledTableCell align="right">Rs.1000.00</StyledTableCell>
-              <StyledTableCell align="right">2021-06-29</StyledTableCell>
-              <StyledTableCell align="right">12.30 a.m</StyledTableCell>
-              <StyledTableCell align="right">Success</StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-primary">
-                  View
-                </button>
-              </StyledTableCell>
-            </StyledTableRow>
+            {data.map((item) => (
+              <StyledTableRow key={item._id}>
+                <StyledTableCell component="th" scope="row">
+                  {item._id}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row">
+                  {item.receiptId}
+                </StyledTableCell>
+                <StyledTableCell align="right">research paper</StyledTableCell>
+                <StyledTableCell align="right">{item.paidFor}</StyledTableCell>
+                <StyledTableCell align="right">{item.amount}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {" "}
+                  {moment(item.paidDate).format("YYYY-MM-DD")}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {" "}
+                  {moment(item.paidDate).format("hh:mm:ss a")}
+                </StyledTableCell>
+                <StyledTableCell align="right">{item.status}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <button type="button" class="btn btn-primary">
+                    View
+                  </button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

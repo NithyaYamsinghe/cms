@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,6 +8,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBox from "../../../common/SearchBox/SearchBox";
+import moment from "moment";
+import { useAuth } from "./../../../context/authContext";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -35,7 +37,23 @@ const useStyles = makeStyles({
 
 const ViewAllWorkShops = () => {
   const classes = useStyles();
+  const [data, setData] = useState([]);
+  const { getworkshop, deleteWorkshop, currentUserID } = useAuth();
 
+  const navigateUpdateWorkshop = (e, workshopId) => {
+    window.location = `/update-workshop/${workshopId}`;
+  };
+
+  const deleteWorkshopSubmission = (e, workshopId) => {
+    deleteWorkshop(workshopId);
+  };
+
+  useEffect(async () => {
+    const data = await getworkshop(currentUserID);
+    setData(data.data);
+  }, []);
+
+  console.log(data);
   return (
     <React.Fragment>
       <SearchBox placeholder="search" />
@@ -51,44 +69,56 @@ const ViewAllWorkShops = () => {
               <StyledTableCell align="right">End</StyledTableCell>
               <StyledTableCell align="right">Conducted By</StyledTableCell>
               <StyledTableCell align="right">Status</StyledTableCell>
-              <StyledTableCell align="right">Proposal</StyledTableCell>
+              {/* <StyledTableCell align="right">Proposal</StyledTableCell> */}
               <StyledTableCell align="right">View</StyledTableCell>
               <StyledTableCell align="right">Update</StyledTableCell>
               <StyledTableCell align="right">Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableRow>
-              <StyledTableCell component="th" scope="row">
-                Introduction to ML
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                This is a workshop on ML
-              </StyledTableCell>
-              <StyledTableCell align="right">2021-12-24</StyledTableCell>
-              <StyledTableCell align="right">10.00 a.m</StyledTableCell>
-              <StyledTableCell align="right">12.00 p.m</StyledTableCell>
-              <StyledTableCell align="right">
-                Ms. Nithya Yamasinghe
-              </StyledTableCell>
-              <StyledTableCell align="right">PDF</StyledTableCell>
-              <StyledTableCell align="right">Approved</StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-primary">
-                  View
-                </button>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-success">
-                  Update
-                </button>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <button type="button" class="btn btn-danger">
-                  Delete
-                </button>
-              </StyledTableCell>
-            </StyledTableRow>
+            {data.map((item) => (
+              <StyledTableRow key={item._id}>
+                <StyledTableCell component="th" scope="row">
+                  {item.title}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {item.description}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {moment(item.startDate).format("YYYY-MM-DD")}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  {item.startTime}
+                </StyledTableCell>
+                <StyledTableCell align="right">{item.endTime}</StyledTableCell>
+                <StyledTableCell align="right">{item.persons}</StyledTableCell>
+                {/* <StyledTableCell align="right">PDF</StyledTableCell> */}
+                <StyledTableCell align="right">{item.status}</StyledTableCell>
+                <StyledTableCell align="right">
+                  <button type="button" class="btn btn-primary">
+                    View
+                  </button>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    onClick={(e) => navigateUpdateWorkshop(e, item._id)}
+                  >
+                    Update
+                  </button>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    onClick={(e) => deleteWorkshopSubmission(e, item._id)}
+                  >
+                    Delete
+                  </button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

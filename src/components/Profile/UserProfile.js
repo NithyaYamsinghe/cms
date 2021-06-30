@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormWrap,
   FormContent,
   Form3,
-  FormH1,
   FormButton,
   FormInput3,
   FormLabel,
   FormSelect3,
 } from "./../../common/FormElements/FormElements";
+import { useAuth } from "./../../context/authContext";
 
 const UserProfile = () => {
   const [email, setEmail] = useState("");
@@ -19,10 +19,38 @@ const UserProfile = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { getUserProfile, updateUser, deleteUser, currentUserID } = useAuth();
+
+  useEffect(async () => {
+    const data = await getUserProfile(currentUserID);
+    console.log(data.data[0].type);
+    if (data != null) {
+      setEmail(data.data[0].email);
+      setUserType(data.data[0].type);
+      setFirstName(data.data[0].firstName);
+      setLastName(data.data[0].lastName);
+      setPhone(data.data[0].contactNo);
+      setUserName(data.data[0].username);
+      setPassword(".........");
+      setConfirmPassword("..........");
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = currentUserID;
     if (password !== confirmPassword) {
+      const data = {
+        username: userName,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        contactNo: phone,
+        type: userType,
+        password: password,
+        id: id,
+      };
+      updateUser(data);
     }
   };
 
@@ -94,7 +122,7 @@ const UserProfile = () => {
                   value={userType}
                   onChange={(e) => setUserType(e.target.value)}
                 >
-                  <option value=""></option>
+                  {/* <option value=""></option> */}
                   <option value="attendee">Attendee</option>
                   <option value="researcher">Researcher</option>
                   <option value="workshopConductor">Workshop Conductor</option>
