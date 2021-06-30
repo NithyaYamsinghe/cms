@@ -165,7 +165,20 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
- {currentUserType === "EDITOR" && (
+            {currentUserType === "ATTENDEE" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "EDITOR" && (
               <li className="nav-text">
                 <Link
                   to="/editor/createkeynote"
@@ -218,11 +231,8 @@ const SideNavigationBar = () => {
                   <span>View Researches</span>
                 </Link>
               </li>
-            )
-                  <span>Payment History</span>
-                </Link>
-              </li>
             )}
+
             {currentUserType === "ADMIN" && (
               <>
                 <li className="nav-text">
