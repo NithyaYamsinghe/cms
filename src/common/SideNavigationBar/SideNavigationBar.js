@@ -182,13 +182,13 @@ const SideNavigationBar = () => {
             {currentUserType === "EDITOR" && (
               <li className="nav-text">
                 <Link
-                  to="/payment-history"
+                  to="/editor/manageworkshops"
                   style={{
                     textDecoration: "none",
                     "font-family": "Anton",
                   }}
                 >
-                  <span>View Workshops</span>
+                  <span>Manage Workshops</span>
                 </Link>
               </li>
             )}
@@ -196,13 +196,41 @@ const SideNavigationBar = () => {
             {currentUserType === "EDITOR" && (
               <li className="nav-text">
                 <Link
-                  to="/payment-history"
+                  to="/editor/manageresearches"
                   style={{
                     textDecoration: "none",
                     "font-family": "Anton",
                   }}
                 >
-                  <span>View Researches</span>
+                  <span>Manage Researches</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/researchnotices"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Research Notices</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/workshopnotices"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Workshop Notices</span>
                 </Link>
               </li>
             )}
