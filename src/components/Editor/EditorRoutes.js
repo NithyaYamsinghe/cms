@@ -2,9 +2,10 @@ import { useRouteMatch, Switch, Route } from "react-router-dom";
 import CreateKeynote from "../../pages/Editor/CreateKeynote";
 
 import ViewKeyNotes from "../../pages/Editor/ViewKeynotes";
-import ViewWorkshopNotice from "../../pages/Admin/ViewWorkshopNotice";
-import ManageResearchTopics from "../../pages/Admin/ManageResearchTopics";
-import AdminDashboard from "../../pages/Admin/AdminDashboard";
+import ViewWorkshops from "../../pages/Editor/ViewWorkshops";
+import ResearchNotices from "../../pages/Editor/ResearchNotices";
+import ViewResearches from "../../pages/Editor/ViewResearches";
+
 import Default from "../../common/Default/Default";
 
 const AdminHome = () => {
@@ -24,7 +25,29 @@ const AdminHome = () => {
           component={ViewKeyNotes}
         />
 
-        <Route exact path={`${match.path}/`} component={AdminDashboard} />
+        <Route
+          exact
+          path={`${match.path}/manageworkshops`}
+          component={ViewWorkshops}
+        />
+
+        <Route
+          exact
+          path={`${match.path}/manageresearches`}
+          component={ViewResearches}
+        />
+
+        <Route
+          exact
+          path={`${match.path}/manageresearches`}
+          component={ViewResearches}
+        />
+
+        <Route
+          exact
+          path={`${match.path}/researchnotices`}
+          component={ResearchNotices}
+        />
         <Route component={Default} />
       </Switch>
     </>
