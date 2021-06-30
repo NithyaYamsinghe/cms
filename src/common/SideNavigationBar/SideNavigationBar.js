@@ -22,12 +22,12 @@ const SideNavigationBar = () => {
           <ul className="navbar-nav align-items-center">
             <li className="nav-items ml-5">
               <Link to="/" className="nav-link">
-                ICAF
+                International Conference of Application Framework 2021
               </Link>
             </li>
           </ul>
           <Link
-            to="/sign-up"
+            to="/user-profile"
             className="ml-auto"
             style={{ paddingRight: "20px" }}
           >
@@ -37,7 +37,7 @@ const SideNavigationBar = () => {
                 style={{ "font-family": "Anton", paddingRight: "10px" }}
               >
                 <i className="FaSignInAlts" />
-                Sign Up
+                Profile
               </span>
             </FormButton>
           </Link>
@@ -51,7 +51,7 @@ const SideNavigationBar = () => {
             </li>
             <li className="nav-text">
               <Link
-                to="/dashboard"
+                to="/user-dashboard"
                 style={{
                   textDecoration: "none",
                   "font-family": "Anton",
@@ -71,7 +71,7 @@ const SideNavigationBar = () => {
                 <span>Profile</span>
               </Link>
             </li>
-            {currentUserType == "RESEARCHER" && (
+            {currentUserType === "RESEARCHER" && (
               <li className="nav-text">
                 <Link
                   to="/upload-new-research"
@@ -84,7 +84,7 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType == "WORKSHOPCONDUCTOR" && (
+            {currentUserType === "WORKSHOPCONDUCTOR" && (
               <li className="nav-text">
                 <Link
                   to="/upload-new-workshop"
@@ -97,7 +97,7 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType == "RESEARCHER" && (
+            {currentUserType === "RESEARCHER" && (
               <li className="nav-text">
                 <Link
                   to="/view-submitted-research-documents"
@@ -111,7 +111,7 @@ const SideNavigationBar = () => {
               </li>
             )}
 
-            {currentUserType == "WORKSHOPCONDUCTOR" && (
+            {currentUserType === "WORKSHOPCONDUCTOR" && (
               <li className="nav-text">
                 <Link
                   to="/view-submitted-workshops"
@@ -124,28 +124,32 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            <li className="nav-text">
-              <Link
-                to="/user-payment"
-                style={{
-                  textDecoration: "none",
-                  "font-family": "Anton",
-                }}
-              >
-                <span>Payments</span>
-              </Link>
-            </li>
-            <li className="nav-text">
-              <Link
-                to="/payment-history"
-                style={{
-                  textDecoration: "none",
-                  "font-family": "Anton",
-                }}
-              >
-                <span>Payment History</span>
-              </Link>
-            </li>
+            {currentUserType !== "WORKSHOPCONDUCTOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType !== "WORKSHOPCONDUCTOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
             <li className="nav-text">
               <Link
                 to="/user-log-out"

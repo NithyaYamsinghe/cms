@@ -77,11 +77,9 @@ const ViewAllResearchDocuments = () => {
                 <StyledTableCell align="right">{item.paidFor}</StyledTableCell>
                 <StyledTableCell align="right">{item.amount}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {" "}
                   {moment(item.paidDate).format("YYYY-MM-DD")}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {" "}
                   {moment(item.paidDate).format("hh:mm:ss a")}
                 </StyledTableCell>
                 <StyledTableCell align="right">{item.status}</StyledTableCell>

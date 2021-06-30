@@ -51,7 +51,7 @@ function getStepContent(step) {
       throw new Error("Unknown step");
   }
 }
-const PaymentCheckout = () => {
+const PaymentCheckout = ({ match }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const classes = useStyles();
   const { createPayment, currentUserID } = useAuth();
@@ -68,6 +68,7 @@ const PaymentCheckout = () => {
       const amount = parseFloat(amountString);
       const country = localStorage.getItem("country");
       const user = currentUserID;
+      const researchId = match.params.id;
 
       const data = {
         firstname: firstName,
@@ -80,6 +81,7 @@ const PaymentCheckout = () => {
         cvv: cvv,
         paidFor: "IOT research paper",
         user: user,
+        researchId: researchId,
       };
 
       createPayment(data);

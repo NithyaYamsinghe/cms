@@ -44,6 +44,10 @@ const ViewAllResearchDocuments = () => {
     window.location = `/update-research/${researchId}`;
   };
 
+  const navigateViewResearch = (e, researchId) => {
+    window.location = `/view-research/${researchId}`;
+  };
+
   const deleteResearchSubmission = (e, researchId) => {
     deleteResearch(researchId);
   };
@@ -96,7 +100,11 @@ const ViewAllResearchDocuments = () => {
                   </button>
                 </StyledTableCell> */}
                 <StyledTableCell align="right">
-                  <button type="button" class="btn btn-primary">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onClick={(e) => navigateViewResearch(e, item._id)}
+                  >
                     View
                   </button>
                 </StyledTableCell>
