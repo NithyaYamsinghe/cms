@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   const [currentUserType, setCurrentUserType] = useState("");
   const [currentUserID, setCurrentUserID] = useState("");
   const [currentUserName, setCurrentUserName] = useState("");
+
   // user related function service calls
   function signIn(data) {
     return AuthService.userSignIn(data);
@@ -176,6 +177,7 @@ export function AuthProvider({ children }) {
   useEffect(async () => {
     setLoading(false);
     const user = AuthService.getCurrentUser();
+    console.log(user);
     if (user != null) {
       setCurrentUserID(user.id);
       setCurrentUserType(user.type);

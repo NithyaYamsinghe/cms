@@ -1,7 +1,7 @@
 import React from "react";
 import PaymentCheckout from "./../components/Payments/PaymentCheckout";
 
-const PaymentScreen = () => {
+const PaymentScreen = ({ match }) => {
   return (
     <React.Fragment
       style={{
@@ -9,7 +9,7 @@ const PaymentScreen = () => {
         marginRight: "50px",
       }}
     >
-      <PaymentCheckout />
+      <PaymentCheckout match={match} />
     </React.Fragment>
   );
 };

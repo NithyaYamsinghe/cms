@@ -23,7 +23,11 @@ const SignInForm = () => {
       username: username,
       password: password,
     };
-    signIn(data);
+    await signIn(data)
+      .then((response) => {
+        window.location = "/user-dashboard";
+      })
+      .catch(() => {});
   };
 
   return (

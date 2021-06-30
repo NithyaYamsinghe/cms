@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import { useAuth } from "./../../context/authContext";
 
 const AddressForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [amount, setAmount] = useState();
   const [country, setCountry] = useState("");
+  const { currentUserType } = useAuth();
+
+  useEffect(async () => {
+    if (currentUserType === "RESEARCHER") {
+      setAmount(10000);
+    }
+    if (currentUserType === "ATTENDEE") {
+      setAmount(2000);
+    }
+  }, []);
 
   localStorage.setItem("firstName", firstName);
   localStorage.setItem("lastName", lastName);

@@ -46,7 +46,7 @@ export const FormContent = styled.div`
   }
 `;
 export const Form = styled.form`
-  background-color: #77acf1;
+  background-color: #010101;
   max-width: 400px;
   height: auto;
   width: 100%;
@@ -55,7 +55,7 @@ export const Form = styled.form`
   margin: 0 auto;
   padding: 80px 32px;
   border-radius: 4px;
-  box-shadow: #77acf1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
   font-family: "Anton", sans-serif !important;
 
   @media screen and (max-width: 480px) {

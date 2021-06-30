@@ -54,6 +54,10 @@ const UserProfile = () => {
     }
   };
 
+  const handleDeleteUser = (e) => {
+    deleteUser(currentUserID);
+  };
+
   return (
     <>
       <FormWrap style={{ marginLeft: "200px" }}>
@@ -122,14 +126,14 @@ const UserProfile = () => {
                   value={userType}
                   onChange={(e) => setUserType(e.target.value)}
                 >
-                  {/* <option value=""></option> */}
-                  <option value="attendee">Attendee</option>
-                  <option value="researcher">Researcher</option>
-                  <option value="workshopConductor">Workshop Conductor</option>
+                  <option value=""></option>
+                  <option value="ATTENDEE">Attendee</option>
+                  <option value="RESEARCHER">Researcher</option>
+                  <option value="WORKSHOPCONDUCTOR">Workshop Conductor</option>
                 </FormSelect3>
               </div>
             </div>
-            <div class="two-col">
+            {/* <div class="two-col">
               <div class="col1">
                 <FormLabel htmlFor="for">Password</FormLabel>
                 <FormInput3
@@ -150,9 +154,18 @@ const UserProfile = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
-            </div>
+            </div> */}
             <FormButton type="submit">Update Profile</FormButton>
           </Form3>
+          <br />
+          <button
+            type="button"
+            class="btn btn-danger"
+            style={{ width: "200px", marginLeft: "60px" }}
+            onClick={(e) => handleDeleteUser(e)}
+          >
+            Delete Account
+          </button>
         </FormContent>
       </FormWrap>
     </>

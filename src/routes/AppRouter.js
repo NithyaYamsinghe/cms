@@ -19,6 +19,7 @@ import ViewResearchScreen from "./../pages/ViewResearchScreen";
 import ViewPaymentReceiptScreen from "./../pages/ViewPaymentReceiptScreen";
 import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
 import UpdateResearchScreen from "./../pages/UpdateResearchScreen";
+import UserDashboardScreen from "./../pages/UserDashboardScreen";
 import { useAuth } from "./../context/authContext";
 
 // Admin
@@ -30,13 +31,15 @@ const AppRouter = () => {
     <React.Fragment>
       {currentUserID && <SideNavigationBar />}
       <Switch>
-        <Route exact path="/" component={HomeScreen}></Route>
+        <Route exact path="/" component={SignInScreen}></Route>
         <Route path="/sign-in" component={SignInScreen}></Route>
         <Route path="/sign-up" component={SignUpScreen}></Route>
+        <Route path="/user-dashboard" component={UserDashboardScreen}></Route>
         <Route path="/user-profile" component={ProfileScreen}></Route>
-        <Route path="/user-payment" component={PaymentScreen}></Route>
+        <Route path="/user-payment/:id" component={PaymentScreen}></Route>
         <Route path="/view-workshop/:id" component={ViewWorkShopScreen}></Route>
         <Route path="/view-research/:id" component={ViewResearchScreen}></Route>
+        <Route path="/user-payment" component={PaymentScreen}></Route>
         <Route
           path="/view-payment-receipt/:id"
           component={ViewPaymentReceiptScreen}
@@ -72,7 +75,7 @@ const AppRouter = () => {
         <Route path="/admin" component={AdminHome}></Route>
         <Route component={Default}></Route>
       </Switch>
-      <Footer />
+      {currentUserID && <Footer />}
     </React.Fragment>
   );
 };
