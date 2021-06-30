@@ -11,6 +11,7 @@ import {
   FormLabel2,
   FormSelect2,
 } from "./../../common/FormElements/FormElements";
+import { useAuth } from "./../../context/AuthContext";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
@@ -21,11 +22,22 @@ const SignUpForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { signUp } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-    }
+
+    const data = {
+      username: userName,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      contactNo: phone,
+      type: userType,
+      password: password,
+    };
+    signUp(data);
+    window.location = "/sign-in";
   };
 
   return (
@@ -117,9 +129,9 @@ const SignUpForm = () => {
                   onChange={(e) => setUserType(e.target.value)}
                 >
                   <option value=""></option>
-                  <option value="attendee">Attendee</option>
-                  <option value="researcher">Researcher</option>
-                  <option value="workshopConductor">Workshop Conductor</option>
+                  <option value="ATTENDEE">Attendee</option>
+                  <option value="RESEARCHER">Researcher</option>
+                  <option value="WORKSHOPCONDUCTOR">Workshop Conductor</option>
                 </FormSelect2>
               </div>
             </div>

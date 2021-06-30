@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import styled from "styled-components";
 import { FormButton } from "./../../common/FormElements/FormElements";
+import { useAuth } from "./../../context/AuthContext";
 
 const SideNavigationBar = () => {
   const [sidebar, setSidebar] = useState(false);
+  const { currentUserType, logout } = useAuth();
 
   const showSidebar = () => setSidebar(!sidebar);
   return (
@@ -49,7 +51,7 @@ const SideNavigationBar = () => {
             </li>
             <li className="nav-text">
               <Link
-                to="/products"
+                to="/dashboard"
                 style={{
                   textDecoration: "none",
                   "font-family": "Anton",
@@ -69,28 +71,59 @@ const SideNavigationBar = () => {
                 <span>Profile</span>
               </Link>
             </li>
-            <li className="nav-text">
-              <Link
-                to="/upload-new-research"
-                style={{
-                  textDecoration: "none",
-                  "font-family": "Anton",
-                }}
-              >
-                <span>Upload New</span>
-              </Link>
-            </li>
-            <li className="nav-text">
-              <Link
-                to="/view-submitted-research-documents"
-                style={{
-                  textDecoration: "none",
-                  "font-family": "Anton",
-                }}
-              >
-                <span>View All</span>
-              </Link>
-            </li>
+            {currentUserType == "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/upload-new-research"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Upload New</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType == "WORKSHOPCONDUCTOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/upload-new-workshop"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Upload New</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType == "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/view-submitted-research-documents"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View All</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType == "WORKSHOPCONDUCTOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/view-submitted-workshops"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View All</span>
+                </Link>
+              </li>
+            )}
             <li className="nav-text">
               <Link
                 to="/user-payment"
@@ -119,6 +152,9 @@ const SideNavigationBar = () => {
                 style={{
                   textDecoration: "none",
                   "font-family": "Anton",
+                }}
+                onClick={() => {
+                  logout();
                 }}
               >
                 <span>Log Out</span>

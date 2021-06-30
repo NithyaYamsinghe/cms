@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   FormWrap,
   FormContent,
   Form3,
-  FormH1,
   FormButton,
   FormInput,
   FormLabel,
@@ -12,6 +10,7 @@ import {
 } from "./../../../common/FormElements/FormElements";
 import Select from "react-select";
 import UploadService from "./../../../services/FileUploadService";
+import { useAuth } from "./../../../context/AuthContext";
 
 const UploadNewResearchForm = () => {
   const [title, setTitle] = useState("");
@@ -24,7 +23,6 @@ const UploadNewResearchForm = () => {
     { value: 1, label: "N.R. Yamasinghe" },
     { value: 2, label: "D.M.Y.S. Dissanayake" },
   ]);
-  const [status, setStatus] = useState("");
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
 
@@ -32,22 +30,23 @@ const UploadNewResearchForm = () => {
   const [currentFile, setCurrentFile] = useState(undefined);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
+  const { researchFileUpload, currentUserID } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let currentFile = selectedFiles[0];
-    console.log(currentFile);
 
     setProgress(0);
     setCurrentFile(currentFile);
-
-    UploadService.upload(
+    const user = currentUserID;
+    researchFileUpload(
       currentFile,
-      status,
-      selectedAuthors,
-      selectedTopics,
-      title,
       description,
+      title,
+      selectedTopics,
+      selectedAuthors,
+      user,
+
       (event) => {
         setProgress(Math.round((100 * event.loaded) / event.total));
       }
@@ -59,9 +58,8 @@ const UploadNewResearchForm = () => {
         setProgress(0);
         setMessage("Could not upload the file!");
         setCurrentFile(undefined);
-      });
-
-    setSelectedFiles(undefined);
+      })
+      .then(() => {});
   };
 
   const selectFile = (e) => {
@@ -69,29 +67,16 @@ const UploadNewResearchForm = () => {
   };
 
   const onTopicSelect = (e) => {
-    setSelectedTopics(e ? e.map((item) => item.value) : []);
+    setSelectedTopics(e ? e.map((item) => item.label) : []);
+    console.log(selectedTopics);
   };
 
   const onAuthorSelect = (e) => {
-    setSelectedAuthors(e ? e.map((item) => item.value) : []);
+    setSelectedAuthors(e ? e.map((item) => item.label) : []);
   };
 
   return (
     <React.Fragment>
-      {currentFile && (
-        <div className="progress">
-          <div
-            className="progress-bar progress-bar-info progress-bar-striped"
-            role="progressbar"
-            aria-valuenow={progress}
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style={{ width: progress + "%" }}
-          >
-            {progress}%
-          </div>
-        </div>
-      )}
       <FormWrap style={{ marginLeft: "200px" }}>
         <FormContent className="mt-3">
           <Form3 onSubmit={handleSubmit}>
@@ -127,6 +112,21 @@ const UploadNewResearchForm = () => {
               isMulti
             />
             <br />
+            {currentFile && (
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style={{ width: progress + "%" }}
+                >
+                  {progress}%
+                </div>
+              </div>
+            )}
+            <br />
             <FormLabel htmlFor="for">
               Upload Research Paper (PDF Document)
             </FormLabel>
@@ -136,6 +136,7 @@ const UploadNewResearchForm = () => {
               type="file"
               onChange={selectFile}
             />
+
             <FormButton type="submit">Upload Research</FormButton>
           </Form3>
         </FormContent>

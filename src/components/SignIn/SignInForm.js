@@ -10,13 +10,20 @@ import {
   Text,
 } from "./../../common/FormElements/FormElements";
 import { Link } from "react-router-dom";
+import { useAuth } from "./../../context/AuthContext";
 
 const SignInForm = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const data = {
+      username: username,
+      password: password,
+    };
+    signIn(data);
   };
 
   return (
