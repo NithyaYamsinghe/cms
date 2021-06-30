@@ -1,10 +1,14 @@
+import { useAuth } from "../../context/authContext";
 import SignInForm from "./forms/SignInForm";
-import { userSignInApi } from "../../services/userAuthService";
+import { useHistory } from "react-router-dom";
 
 const SignIn = () => {
+  const { signIn } = useAuth();
+  const history = useHistory();
+
   const userSignIn = async (data) => {
-    const response = await userSignInApi(data);
-    //TODO: Save the user
+    await signIn(data, "admin");
+    history.push("/admin");
   };
 
   return <SignInForm onSubmit={userSignIn} />;

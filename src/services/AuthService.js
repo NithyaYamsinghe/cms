@@ -1,17 +1,31 @@
 import http from "./HtttpService";
 import jwtDecode from "jwt-decode";
 
-const userSignIn = async (data) => {
-  try {
-    const response = await http.post("/users/sign-in", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    localStorage.setItem("token", response.data.token);
-    return response;
-  } catch (error) {
-    console.log(error);
+const userSignIn = async (data, mode) => {
+  if (mode === "admin") {
+    try {
+      const response = await http.post("/admin/sign-in", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      localStorage.setItem("token", response.data.token);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      const response = await http.post("/users/sign-in", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      localStorage.setItem("token", response.data.token);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 
