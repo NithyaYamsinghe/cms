@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { getWorkshopNoticeApi } from "../../services/workshopService";
+import Moment from "react-moment";
 
 const ViewWorkshopNotice = () => {
   const { workshopNoticeId } = useParams();
@@ -34,11 +35,17 @@ const ViewWorkshopNotice = () => {
           </Row>
           <Row>
             <Col>Start Date:</Col>
-            <Col md={10}>{workshopNotice.startDate}</Col>
+            <Col md={10}>
+              <Moment format="YYYY/MM/DD">{workshopNotice.startDate}</Moment>
+            </Col>
           </Row>
           <Row>
             <Col>End Time:</Col>
-            <Col md={10}>{workshopNotice.endTime}</Col>
+            <Col md={10}>
+              <Moment format="YYYY/MM/DD hh:mm A">
+                {workshopNotice.endTime}
+              </Moment>
+            </Col>
           </Row>
           <Row>
             <Col>Authors:</Col>
