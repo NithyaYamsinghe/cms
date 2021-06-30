@@ -4,6 +4,7 @@ import UserResearchService from "../services/UserResearchService";
 import UserWorkshopService from "../services/UserWorkshopService";
 import AuthService from "../services/AuthService";
 import FileUploadService from "../services/FileUploadService";
+import EditorServices from "../services/EditorServices";
 
 const AuthContext = React.createContext();
 
@@ -184,6 +185,30 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  //editor functions
+
+  function createNewKeynote(
+    file,
+    name,
+    workplace,
+    description,
+    user,
+    onUploadProgress
+  ) {
+    return EditorServices.keynoteUpload(
+      file,
+      name,
+      workplace,
+      description,
+      user,
+      onUploadProgress
+    );
+  }
+
+  function getKeynotes(userId) {
+    return EditorServices.getKeynotes(userId);
+  }
+
   const value = {
     signIn,
     signUp,
@@ -204,6 +229,8 @@ export function AuthProvider({ children }) {
     createPayment,
     getPayment,
     getPaymentById,
+    createNewKeynote,
+    getKeynotes,
     currentUserName,
     currentUserFirstName,
     currentUserLastName,

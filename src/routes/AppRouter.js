@@ -25,6 +25,9 @@ import { useAuth } from "./../context/authContext";
 // Admin
 import AdminHome from "../components/Admin/AdminHome";
 
+//Editor
+import EditorRoutes from "../components/Editor/EditorRoutes";
+
 const AppRouter = () => {
   const { currentUserID } = useAuth();
   return (
@@ -73,6 +76,7 @@ const AppRouter = () => {
           component={ViewAllWorkShopsScreen}
         ></Route>
         <Route path="/admin" component={AdminHome}></Route>
+        <Route path="/editor" component={EditorRoutes}></Route>
         <Route component={Default}></Route>
       </Switch>
       {currentUserID && <Footer />}
