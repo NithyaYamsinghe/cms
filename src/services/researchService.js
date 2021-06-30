@@ -37,3 +37,25 @@ export const deleteResearchNoticeApi = async (researchNoticeId) => {
     console.log(error);
   }
 };
+
+export const getResearchTopicsApi = async () => {
+  try {
+    const response = await http.get("/research/topics");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createResearchTopicApi = async (data) => {
+  try {
+    const response = await http.post("/research/topics", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
