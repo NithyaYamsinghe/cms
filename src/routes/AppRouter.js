@@ -19,7 +19,7 @@ import ViewResearchScreen from "./../pages/ViewResearchScreen";
 import ViewPaymentReceiptScreen from "./../pages/ViewPaymentReceiptScreen";
 import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
 import UpdateResearchScreen from "./../pages/UpdateResearchScreen";
-import { useAuth } from "./../context/AuthContext";
+import { useAuth } from "./../context/authContext";
 
 // Admin
 import AdminHome from "../components/Admin/AdminHome";

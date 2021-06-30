@@ -1,10 +1,10 @@
 import React from "react";
 import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
 
-const UpdateWorkShopScreen = () => {
+const UpdateWorkShopScreen = ({ match }) => {
   return (
     <div>
-      <UpdateWorkShopForm />
+      <UpdateWorkShopForm match={match} />
     </div>
   );
 };

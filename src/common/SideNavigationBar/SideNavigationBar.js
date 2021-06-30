@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 import styled from "styled-components";
 import { FormButton } from "./../../common/FormElements/FormElements";
-import { useAuth } from "./../../context/AuthContext";
+import { useAuth } from "./../../context/authContext";
 
 const SideNavigationBar = () => {
   const [sidebar, setSidebar] = useState(false);

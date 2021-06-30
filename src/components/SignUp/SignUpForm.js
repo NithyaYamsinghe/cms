@@ -11,7 +11,7 @@ import {
   FormLabel2,
   FormSelect2,
 } from "./../../common/FormElements/FormElements";
-import { useAuth } from "./../../context/AuthContext";
+import { useAuth } from "./../../context/authContext";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");

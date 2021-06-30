@@ -9,7 +9,7 @@ import {
   FormTextArea,
 } from "./../../../common/FormElements/FormElements";
 import Select from "react-select";
-import { useAuth } from "./../../../context/AuthContext";
+import { useAuth } from "./../../../context/authContext";
 
 const UpdateResearchForm = ({ match }) => {
   const [title, setTitle] = useState("");

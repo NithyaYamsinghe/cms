@@ -9,8 +9,7 @@ import {
   FormTextArea,
 } from "./../../../common/FormElements/FormElements";
 import Select from "react-select";
-import UploadService from "./../../../services/FileUploadService";
-import { useAuth } from "./../../../context/AuthContext";
+import { useAuth } from "./../../../context/authContext";
 
 const UploadNewResearchForm = () => {
   const [title, setTitle] = useState("");

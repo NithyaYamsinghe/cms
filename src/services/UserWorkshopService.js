@@ -20,7 +20,7 @@ const getWorkshopById = async (workshopId) => {
 
 const deleteWorkshop = async (workshopId) => {
   try {
-    const response = await http.delete(`/workshop/delete/${workshopId}`);
+    const response = await http.delete(`/workshops/delete/${workshopId}`);
     return response;
   } catch (error) {
     console.log(error);

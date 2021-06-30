@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import PaymentService from "../services/PaymentService";
 import UserResearchService from "../services/UserResearchService";
 import UserWorkshopService from "../services/UserWorkshopService";
-import AuthService from "./../services/AuthService";
-import FileUploadService from "./../services/FileUploadService";
+import AuthService from "../services/AuthService";
+import FileUploadService from "../services/FileUploadService";
 
 const AuthContext = React.createContext();
 
