@@ -11,7 +11,6 @@ import {
 } from "./../../../common/FormElements/FormElements";
 import Select from "react-select";
 import { useAuth } from "./../../../context/authContext";
-import { moment } from "moment";
 
 const UpdateWorkShopForm = ({ match }) => {
   const [title, setTitle] = useState("");

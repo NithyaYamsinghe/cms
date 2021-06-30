@@ -49,17 +49,19 @@ const SideNavigationBar = () => {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            <li className="nav-text">
-              <Link
-                to="/user-dashboard"
-                style={{
-                  textDecoration: "none",
-                  "font-family": "Anton",
-                }}
-              >
-                <span>Dashboard</span>
-              </Link>
-            </li>
+            {currentUserType !== "ADMIN" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-dashboard"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Dashboard</span>
+                </Link>
+              </li>
+            )}
             <li className="nav-text">
               <Link
                 to="/user-profile"
@@ -124,7 +126,7 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType !== "WORKSHOPCONDUCTOR" && (
+            {currentUserType === "ATTENDEE" && (
               <li className="nav-text">
                 <Link
                   to="/user-payment"
@@ -137,7 +139,20 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType !== "WORKSHOPCONDUCTOR" && (
+            {currentUserType === "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "RESEARCHER" && (
               <li className="nav-text">
                 <Link
                   to="/payment-history"
@@ -150,8 +165,7 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-
-            {currentUserType === "EDITOR" && (
+ {currentUserType === "EDITOR" && (
               <li className="nav-text">
                 <Link
                   to="/editor/createkeynote"
@@ -178,7 +192,6 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-
             {currentUserType === "EDITOR" && (
               <li className="nav-text">
                 <Link
@@ -205,8 +218,59 @@ const SideNavigationBar = () => {
                   <span>View Researches</span>
                 </Link>
               </li>
+            )
+                  <span>Payment History</span>
+                </Link>
+              </li>
             )}
-
+            {currentUserType === "ADMIN" && (
+              <>
+                <li className="nav-text">
+                  <Link
+                    to="/admin"
+                    style={{
+                      textDecoration: "none",
+                      "font-family": "Anton",
+                    }}
+                  >
+                    <span>Admin Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nav-text">
+                  <Link
+                    to="/admin/research-notices"
+                    style={{
+                      textDecoration: "none",
+                      "font-family": "Anton",
+                    }}
+                  >
+                    <span>Research Notices</span>
+                  </Link>
+                </li>
+                <li className="nav-text">
+                  <Link
+                    to="/admin/workshop-notices"
+                    style={{
+                      textDecoration: "none",
+                      "font-family": "Anton",
+                    }}
+                  >
+                    <span>Workshop Notices</span>
+                  </Link>
+                </li>
+                <li className="nav-text">
+                  <Link
+                    to="/admin/research-topics"
+                    style={{
+                      textDecoration: "none",
+                      "font-family": "Anton",
+                    }}
+                  >
+                    <span>Manage Reserach Topics</span>
+                  </Link>
+                </li>
+              </>
+            )}
             <li className="nav-text">
               <Link
                 to="/user-log-out"

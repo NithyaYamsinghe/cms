@@ -6,7 +6,6 @@ import {
   FormH1,
   FormLabel,
   FormButton,
-  Text,
 } from "./../../../common/FormElements/FormElements";
 import { useForm } from "react-hook-form";
 
@@ -36,22 +35,6 @@ const SignInForm = ({ onSubmit }) => {
               type="password"
             />
             <FormButton type="submit">Sign In</FormButton>
-            {/* <Text>
-              <Link
-                to="/resetPassword"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                Forgot Password?
-              </Link> 
-            </Text>
-            {/* <Text>
-              <Link
-                to="/sign-up"
-                style={{ textDecoration: "none", color: "#fff" }}
-              >
-                Create an Account
-              </Link>
-            </Text> */}
           </Form>
         </FormContent>
       </FormWrap>
