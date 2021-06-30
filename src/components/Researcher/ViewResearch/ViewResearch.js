@@ -22,7 +22,7 @@ const ViewResearch = ({ match }) => {
     window.location = `/user-payment/${researchId}`;
   };
   return (
-    <div className="card">
+    <div className="card dashboard-text">
       <h5 class="card-header">Research ID - {researchId}</h5>
       <div class="card-body">
         <h5 class="card-title">{title}</h5>
