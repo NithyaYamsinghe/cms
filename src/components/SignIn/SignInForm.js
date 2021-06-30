@@ -10,24 +10,13 @@ import {
   Text,
 } from "./../../common/FormElements/FormElements";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
 
 const SignInForm = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      username: username,
-      password: password,
-    };
-    await signIn(data)
-      .then((response) => {
-        window.location = "/user-dashboard";
-      })
-      .catch(() => {});
   };
 
   return (
@@ -67,6 +56,22 @@ const SignInForm = () => {
                 style={{ textDecoration: "none", color: "#fff" }}
               >
                 Create an Account
+              </Link>
+            </Text>
+            <Text>
+              <Link
+                to="/admin/sign-in"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                Admin Sign In
+              </Link>
+            </Text>
+            <Text>
+              <Link
+                to="/admin/sign-up"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                Admin Sign Up
               </Link>
             </Text>
           </Form>
