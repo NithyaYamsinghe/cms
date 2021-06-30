@@ -150,6 +150,63 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/createkeynote"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Create Keynote</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/viewkeynotes"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Keynotes</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Workshops</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Researches</span>
+                </Link>
+              </li>
+            )}
+
             <li className="nav-text">
               <Link
                 to="/user-log-out"
