@@ -126,34 +126,103 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType !== "WORKSHOPCONDUCTOR" ||
-              (currentUserType !== "ADMIN" && (
-                <li className="nav-text">
-                  <Link
-                    to="/user-payment"
-                    style={{
-                      textDecoration: "none",
-                      "font-family": "Anton",
-                    }}
-                  >
-                    <span>Payments</span>
-                  </Link>
-                </li>
-              ))}
-            {currentUserType !== "WORKSHOPCONDUCTOR" ||
-              (currentUserType !== "ADMIN" && (
-                <li className="nav-text">
-                  <Link
-                    to="/payment-history"
-                    style={{
-                      textDecoration: "none",
-                      "font-family": "Anton",
-                    }}
-                  >
-                    <span>Payment History</span>
-                  </Link>
-                </li>
-              ))}
+            {currentUserType === "ATTENDEE" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
+ {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/createkeynote"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Create Keynote</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/editor/viewkeynotes"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Keynotes</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Workshops</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "EDITOR" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>View Researches</span>
+                </Link>
+              </li>
+            )
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
             {currentUserType === "ADMIN" && (
               <>
                 <li className="nav-text">
