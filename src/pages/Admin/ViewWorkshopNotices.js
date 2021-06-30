@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Table, Container, Button, Row } from "react-bootstrap";
+import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import {
   getWorkshopNoticesApi,
@@ -33,8 +34,12 @@ const ViewWorkshopNotices = () => {
           <td>{row.title}</td>
           <td>{row.description}</td>
           <td>{row.persons}</td>
-          <td>{row.startDate}</td>
-          <td>{row.endTime}</td>
+          <td>
+            <Moment format="YYYY/MM/DD">{row.startDate}</Moment>
+          </td>
+          <td>
+            <Moment format="YYYY/MM/DD hh:mm A">{row.endTime}</Moment>
+          </td>
           <td>
             <Link
               to={`/admin/workshop-notices/${row._id}`}
