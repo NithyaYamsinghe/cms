@@ -209,6 +209,18 @@ export function AuthProvider({ children }) {
     return EditorServices.getKeynotes(userId);
   }
 
+  function getAllWorkshops() {
+    return EditorServices.getAllWorkshops();
+  }
+
+  function getAllResearches() {
+    return EditorServices.getAllResearches();
+  }
+
+  function createWorkshopNotice(workshopId) {
+    return EditorServices.createWorkshopNotice(workshopId);
+  }
+
   const value = {
     signIn,
     signUp,
@@ -231,6 +243,9 @@ export function AuthProvider({ children }) {
     getPaymentById,
     createNewKeynote,
     getKeynotes,
+    getAllWorkshops,
+    createWorkshopNotice,
+    getAllResearches,
     currentUserName,
     currentUserFirstName,
     currentUserLastName,
