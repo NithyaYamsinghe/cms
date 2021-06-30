@@ -19,14 +19,16 @@ import ViewResearchScreen from "./../pages/ViewResearchScreen";
 import ViewPaymentReceiptScreen from "./../pages/ViewPaymentReceiptScreen";
 import UpdateWorkShopForm from "./../components/WorkshopConductor/UpdateWorkShop/UpdateWorkShopForm";
 import UpdateResearchScreen from "./../pages/UpdateResearchScreen";
+import { useAuth } from "./../context/AuthContext";
 
 // Admin
 import AdminHome from "../components/Admin/AdminHome";
 
 const AppRouter = () => {
+  const { currentUserID } = useAuth();
   return (
     <React.Fragment>
-      <SideNavigationBar />
+      {currentUserID && <SideNavigationBar />}
       <Switch>
         <Route exact path="/" component={HomeScreen}></Route>
         <Route path="/sign-in" component={SignInScreen}></Route>
@@ -43,7 +45,10 @@ const AppRouter = () => {
           path="/update-workshop/:id"
           component={UpdateWorkShopForm}
         ></Route>
-        <Route path="/update-research" component={UpdateResearchScreen}></Route>
+        <Route
+          path="/update-research/:id"
+          component={UpdateResearchScreen}
+        ></Route>
         <Route
           path="/payment-history"
           component={ViewAllPaymentHistoryScreen}

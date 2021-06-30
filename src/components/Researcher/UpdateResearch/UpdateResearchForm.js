@@ -1,65 +1,17 @@
-import React, { useState } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
+import React, { useState, useEffect } from "react";
 import {
-  Card,
-  CardActions,
-  CardContent,
-  Divider,
-  Button,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import clsx from "clsx";
+  FormWrap,
+  FormContent,
+  Form3,
+  FormButton,
+  FormInput,
+  FormLabel,
+  FormTextArea,
+} from "./../../../common/FormElements/FormElements";
+import Select from "react-select";
+import { useAuth } from "./../../../context/AuthContext";
 
-const styles = (theme) => ({
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  toolbar: theme.mixins.toolbar,
-  root: {},
-  details: {
-    display: "flex",
-  },
-  avatar: {
-    height: 110,
-    width: 100,
-    flexShrink: 0,
-    flexGrow: 0,
-  },
-  locationText: {
-    paddingLeft: "15px",
-  },
-  buttonProperty: {
-    position: "absolute",
-    top: "50%",
-  },
-  uiProgess: {
-    position: "fixed",
-    zIndex: "1000",
-    height: "31px",
-    width: "31px",
-    left: "50%",
-    top: "35%",
-  },
-  progess: {
-    position: "absolute",
-  },
-  uploadButton: {
-    marginLeft: "8px",
-    margin: theme.spacing(1),
-  },
-  customError: {
-    color: "red",
-    fontSize: "0.8rem",
-    marginTop: 10,
-  },
-  submitButton: {
-    marginTop: "10px",
-  },
-});
-
-const UpdateResearchForm = (props) => {
+const UpdateResearchForm = ({ match }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [topics, setTopics] = useState([
@@ -70,7 +22,6 @@ const UpdateResearchForm = (props) => {
     { value: 1, label: "N.R. Yamasinghe" },
     { value: 2, label: "D.M.Y.S. Dissanayake" },
   ]);
-  const [status, setStatus] = useState("");
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
 
@@ -78,37 +29,42 @@ const UpdateResearchForm = (props) => {
   const [currentFile, setCurrentFile] = useState(undefined);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState("");
-  const { classes, ...rest } = props;
+  const { updateResearch, getResearchById } = useAuth();
+
+  useEffect(async () => {
+    const data = await getResearchById(match.params.id);
+    setTitle(data.data[0].title);
+    setDescription(data.data[0].description);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let currentFile = selectedFiles[0];
-    console.log(currentFile);
 
     setProgress(0);
     setCurrentFile(currentFile);
+    const id = match.params.id;
+    updateResearch(
+      currentFile,
+      description,
+      title,
+      selectedTopics,
+      selectedAuthors,
+      id,
 
-    // UploadService.upload(
-    //   currentFile,
-    //   status,
-    //   selectedAuthors,
-    //   selectedTopics,
-    //   title,
-    //   description,
-    //   (event) => {
-    //     setProgress(Math.round((100 * event.loaded) / event.total));
-    //   }
-    // )
-    //   .then((response) => {
-    //     setMessage(response.data.message);
-    //   })
-    //   .catch(() => {
-    //     setProgress(0);
-    //     setMessage("Could not upload the file!");
-    //     setCurrentFile(undefined);
-    //   });
-
-    setSelectedFiles(undefined);
+      (event) => {
+        setProgress(Math.round((100 * event.loaded) / event.total));
+      }
+    )
+      .then((response) => {
+        setMessage(response.data.message);
+      })
+      .catch(() => {
+        setProgress(0);
+        setMessage("Could not upload the file!");
+        setCurrentFile(undefined);
+      })
+      .then(() => {});
   };
 
   const selectFile = (e) => {
@@ -116,95 +72,82 @@ const UpdateResearchForm = (props) => {
   };
 
   const onTopicSelect = (e) => {
-    setSelectedTopics(e ? e.map((item) => item.value) : []);
+    setSelectedTopics(e ? e.map((item) => item.label) : []);
+    console.log(selectedTopics);
   };
 
   const onAuthorSelect = (e) => {
-    setSelectedAuthors(e ? e.map((item) => item.value) : []);
+    setSelectedAuthors(e ? e.map((item) => item.label) : []);
   };
 
   return (
-    <div>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Card {...rest} className={clsx(classes.root, classes)}>
-          <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-            <Divider />
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="First name"
-                    margin="dense"
-                    name="firstName"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Last name"
-                    margin="dense"
-                    name="lastName"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="User Name"
-                    margin="dense"
-                    name="username"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Phone Number"
-                    margin="dense"
-                    name="phoneNumber"
-                    type="number"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    margin="dense"
-                    name="email"
-                    disabled={true}
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item md={6} xs={12}>
-                  <TextField
-                    fullWidth
-                    label="NIC"
-                    margin="dense"
-                    name="NIC"
-                    variant="outlined"
-                    disabled={true}
-                  />
-                </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions />
-          </form>
-        </Card>
-        <Button
-          color="primary"
-          variant="contained"
-          type="submit"
-          className={classes.submitButton}
-        >
-          Update Details
-        </Button>
-      </main>
-    </div>
+    <React.Fragment>
+      <FormWrap style={{ marginLeft: "200px" }}>
+        <FormContent className="mt-3">
+          <Form3 onSubmit={handleSubmit}>
+            <FormLabel htmlFor="for">Research Title</FormLabel>
+            <FormInput
+              htmlFor="title"
+              required
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <FormLabel htmlFor="for">Description</FormLabel>
+            <FormTextArea
+              htmlFor="description"
+              required
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <FormLabel htmlFor="for">Select Topic Interests</FormLabel>
+            <Select
+              options={topics}
+              onChange={(e) => onTopicSelect(e)}
+              className="basic-multi-select"
+              isMulti
+            />
+            <br />
+            <FormLabel htmlFor="for">Select Authors</FormLabel>
+            <Select
+              options={authors}
+              onChange={(e) => onAuthorSelect(e)}
+              className="basic-multi-select"
+              isMulti
+            />
+            <br />
+            {currentFile && (
+              <div className="progress">
+                <div
+                  className="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style={{ width: progress + "%" }}
+                >
+                  {progress}%
+                </div>
+              </div>
+            )}
+            <br />
+            <FormLabel htmlFor="for">
+              Upload Research Paper (PDF Document)
+            </FormLabel>
+            <FormInput
+              htmlFor="pdf"
+              required
+              type="file"
+              onChange={selectFile}
+            />
+
+            <FormButton type="submit">Upload Research</FormButton>
+          </Form3>
+        </FormContent>
+      </FormWrap>
+    </React.Fragment>
   );
 };
 
-export default withStyles(styles)(UpdateResearchForm);
+export default UpdateResearchForm;

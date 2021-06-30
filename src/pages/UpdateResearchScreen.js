@@ -1,10 +1,10 @@
 import React from "react";
 import UpdateResearchForm from "./../components/Researcher/UpdateResearch/UpdateResearchForm";
 
-const UpdateResearchScreen = () => {
+const UpdateResearchScreen = ({ match }) => {
   return (
     <div>
-      <UpdateResearchForm />
+      <UpdateResearchForm match={match} />
     </div>
   );
 };
