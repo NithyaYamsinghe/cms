@@ -126,34 +126,59 @@ const SideNavigationBar = () => {
                 </Link>
               </li>
             )}
-            {currentUserType !== "WORKSHOPCONDUCTOR" ||
-              (currentUserType !== "ADMIN" && (
-                <li className="nav-text">
-                  <Link
-                    to="/user-payment"
-                    style={{
-                      textDecoration: "none",
-                      "font-family": "Anton",
-                    }}
-                  >
-                    <span>Payments</span>
-                  </Link>
-                </li>
-              ))}
-            {currentUserType !== "WORKSHOPCONDUCTOR" ||
-              (currentUserType !== "ADMIN" && (
-                <li className="nav-text">
-                  <Link
-                    to="/payment-history"
-                    style={{
-                      textDecoration: "none",
-                      "font-family": "Anton",
-                    }}
-                  >
-                    <span>Payment History</span>
-                  </Link>
-                </li>
-              ))}
+            {currentUserType === "ATTENDEE" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/user-payment"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payments</span>
+                </Link>
+              </li>
+            )}
+            {currentUserType === "RESEARCHER" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
+
+            {currentUserType === "ATTENDEE" && (
+              <li className="nav-text">
+                <Link
+                  to="/payment-history"
+                  style={{
+                    textDecoration: "none",
+                    "font-family": "Anton",
+                  }}
+                >
+                  <span>Payment History</span>
+                </Link>
+              </li>
+            )}
             {currentUserType === "ADMIN" && (
               <>
                 <li className="nav-text">
